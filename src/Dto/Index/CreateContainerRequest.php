@@ -3,8 +3,8 @@ namespace NubersoftCms\Dto\Index;
 
 use \Nubersoft\ {
     nApp,
-    nAutomator,
-    nGlobal,
+    nAutomator\Controller as nAutomator,
+    nGlobal\Observer as nGlobal,
     nRouter,
     nSession,
     Settings

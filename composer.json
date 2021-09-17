@@ -1,0 +1,23 @@
+{
+    "name": "rasclatt/nubersoft-cms",
+    "type": "library",
+    "description": "Support for the Nubersoft CMS.",
+    "keywords": ["Nubersoft","PHP","framework","cms"],
+    "homepage": "https://github.com/rasclatt/nubersoft-cms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Rayner",
+            "email": "rasclatt@me.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+		"psr-4": {
+			"Nubersoft\\": "src/"
+		}
+	},
+    "require": {
+        "rasclatt/smart-dto": "*"
+    }
+}
