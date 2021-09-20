@@ -14,8 +14,7 @@ class CreateContainerRequest extends \SmartDto\Dto
 {
     public $nApp, $Session, $nGlobal, $Automator, $Router, $Settings;
     /**
-     *	@description	
-     *	@param	
+     *	@description	Creates core functions for the cms start up process
      */
     protected function beforeConstruct($array)
     {
@@ -25,5 +24,23 @@ class CreateContainerRequest extends \SmartDto\Dto
         $array['Automator'] = new nAutomator;
         $array['Router'] = new nRouter;
         $array['Settings'] = new Settings;
+
+        return $array;
+    }
+    /**
+     *	@description	Redirects to program start up
+     */
+    public function initStartUp()
+    {
+        if (!is_file(NBR_CLIENT_SETTINGS.DS.'dbcreds.php')) {
+            $this->Router->redirect('/domain/core/installer/index.php');
+        }
+    }
+    /**
+     *	@description	Starts the default application
+     */
+    public function runApplication()
+    {
+        $this->Automator->createWorkflow('default');
     }
 }
