@@ -14,8 +14,8 @@ class Api
      */
     public static function generateKey(array $body = null)
     {
-        $def = ['token' => password_hash(JWT::getJwtPath(), PASSWORD_BCRYPT)];
-        if(!is_array($body))
+        $def = ['token' => password_hash(JWT::getJwtTokenSecret(), PASSWORD_BCRYPT)];
+        if(is_array($body))
             $def = array_merge($def, $body);
 
         return JWTFactory::get()->create($def);
