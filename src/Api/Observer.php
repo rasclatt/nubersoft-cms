@@ -35,11 +35,19 @@ abstract class Observer implements nObserver
            $execute = true; 
         }
         else {
-            $token = str_ireplace('Bearer ', '', (new Server)->HTTP_AUTHORIZATION);
-            $jwt = JWTFactory::get()->valid($token)['token']?? null;
+            $SERVER = new Server;
+            $token = trim(str_ireplace('Bearer ', '', $SERVER->HTTP_AUTHORIZATION));
+            $jwt = null;
+            try {
+                $jwt = JWTFactory::get()->get($token)['token']?? null;
+            }
+            catch (\Exception $e) {
+
+            }
             if(empty($jwt))
                 return ['error' => 'Invalid request. Bad permissions.', 'code' => 403];
-            $execute = password_verify(JWT::getJwtPath(), $jwt);
+
+            $execute = password_verify(JWT::getJwtTokenSecret(), $jwt);
         }
         if($execute)
             return $this->{$method}((class_exists($dto))? new $dto($this->request) : $this->request);
